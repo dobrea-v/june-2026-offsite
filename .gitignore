@@ -1,0 +1,11 @@
+# OS
+.DS_Store
+
+# Logs
+*.log
+
+# Local Claude Code settings
+.claude/
+
+# Separate prototype project — has its own git repo & remote (Sharp-Vision-Inc/interactive-slider)
+interactive-slider/

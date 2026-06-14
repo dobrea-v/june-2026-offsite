@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>oryx — Scroll yourself sharp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;600;700;800&family=Wix+Madefor+Text:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="scroll-journey.css" />
+<style>
+  /* Globals + shared colour tokens (provided by the host site when embedded;
+     defined here so the standalone page is self-contained). */
+  :root {
+    --bg: #0a0a0b; --ink: #ffffff; --ink-soft: #a8a8b3;
+    --lilac: #b9bcff; --violet: #666eff; --violet-deep: #2f5dff;
+    --track: #2a2a30; --paper: #f8f5ef; --paper-ink: #2b2433;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: "Wix Madefor Text", "Helvetica Neue", system-ui, sans-serif; background: var(--bg); color: var(--ink); }
+</style>
+</head>
+<body>
+  <div id="journey"></div>
+  <script src="scroll-journey.js"></script>
+  <script>
+    // Standalone: the outro CTA just replays (no assessment section on this page).
+    OryxJourney.mount('#journey', { nextHref: '#journey', nextLabel: 'Replay' });
+  </script>
+</body>
+</html>

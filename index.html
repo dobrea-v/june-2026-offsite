@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oryx — See close. Go far.</title>
+  <meta name="description" content="Scroll yourself sharp, check your near vision, and find your partner optometrist — the Oryx near-vision funnel.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;500;600;700;800&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="widgets/scroll-journey/scroll-journey.css">
+  <link rel="stylesheet" href="widgets/oryx-assessment/oryx-assessment.css">
+  <link rel="stylesheet" href="widgets/clinic-finder/clinic-finder.css">
+</head>
+<body>
+
+  <!-- ============ 1 · Scroll journey (lead / brand story) ============ -->
+  <div id="journey"></div>
+
+  <!-- ============ 2 · Self-assessment ============ -->
+  <section class="act act-assess" id="assess">
+    <div class="act-inner">
+      <div class="act-intro">
+        <p class="act-kicker">Your turn</p>
+        <h2>Now measure your own near vision</h2>
+        <p>You just saw what training does. Take the 30-second Oryx test to see where your
+          eyes stand today — an indicative read on your near vision, no glasses required.</p>
+      </div>
+      <div class="assess-stage">
+        <div id="oryx"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3 · Find your optometrist ============ -->
+  <section class="act act-clinics" id="clinics">
+    <div class="act-inner">
+      <div class="act-intro">
+        <p class="act-kicker">Last step</p>
+        <h2>Find your partner optometrist</h2>
+        <p>Pick a partner clinic for a proper, calibrated assessment. Your choice carries
+          through to checkout so the right clinic gets the credit.</p>
+      </div>
+      <div id="clinic-map"></div>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <span>Oryx · See close. Go far.</span>
+      <span>Indicative screening only — not a clinical eye test.</span>
+    </div>
+  </footer>
+
+  <script src="widgets/scroll-journey/scroll-journey.js"></script>
+  <script src="widgets/oryx-assessment/oryx-assessment.js"></script>
+  <script src="widgets/clinic-finder/clinic-finder.js"></script>
+  <script>
+    // 1 — scroll journey leads the page; its outro CTA scrolls to the assessment.
+    OryxJourney.mount('#journey', { nextHref: '#assess', nextLabel: 'Test your own vision' });
+
+    // 2 — assessment. Its "Find a partner clinic" CTA is an in-page anchor, so it
+    //     scrolls down to the clinic map (same tab) instead of leaving the funnel.
+    OryxAssessment.mount('#oryx', {
+      clinicUrl: '#clinics',
+      learnUrl: 'https://oryxneuro.com',
+      onLead: function (lead) { console.log('[oryx] captured lead', lead); }
+    });
+
+    // 3 — clinic finder. Selecting a clinic enables checkout with the clinic attributed.
+    OryxClinics.mount('#clinic-map', {
+      checkoutUrl: 'https://oryxneuro.com',
+      onSelect: function (c) { console.log('[oryx] selected clinic', c && c.id); }
+    });
+  </script>
+</body>
+</html>

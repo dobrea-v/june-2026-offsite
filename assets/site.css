@@ -1,0 +1,77 @@
+/* Single-page funnel — connective styles + shared tokens.
+   The page flows: scroll journey → self-assessment → clinic finder → footer.
+   Widget-specific styles live in each widget's own CSS. */
+
+:root {
+  /* brand */
+  --bg: #0a0a0b;
+  --ink: #ffffff;
+  --ink-soft: #a8a8b3;
+  --muted: rgba(255,255,255,0.62);
+  --line: rgba(255,255,255,0.1);
+  --accent: #666eff;
+  --accent-deep: #2f5dff;
+  --accent-soft: #b9bcff;
+  --card: #16161c;
+
+  /* shared with the scroll-journey widget */
+  --lilac: #b9bcff;
+  --violet: #666eff;
+  --violet-deep: #2f5dff;
+  --track: #2a2a30;
+  --paper: #f8f5ef;
+  --paper-ink: #2b2433;
+
+  --sans: "Wix Madefor Display", "Wix Madefor Text", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+/* NOTE: do not put overflow-x:hidden on html/body — it breaks the journey's
+   position:sticky pin in Safari/Firefox. Horizontal overflow is contained per-widget. */
+body {
+  font-family: "Wix Madefor Text", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { font-family: var(--sans); }
+
+.wrap { width: 100%; max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+/* ---- act sections (assessment / clinics) ---- */
+.act {
+  position: relative;
+  padding: 96px 24px;
+  scroll-margin-top: 0;
+}
+.act + .act { border-top: 1px solid var(--line); }
+.act-inner { width: 100%; max-width: 1040px; margin: 0 auto; }
+.act-intro { max-width: 640px; margin: 0 auto 40px; text-align: center; }
+.act-kicker {
+  color: var(--accent-soft); font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; margin-bottom: 14px;
+}
+.act-intro h2 { font-size: clamp(28px, 4.5vw, 44px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08; margin-bottom: 14px; }
+.act-intro p { color: var(--muted); font-size: 17px; line-height: 1.6; }
+
+/* assessment widget gets a comfortable max width and centering */
+.act-assess .assess-stage { max-width: 560px; margin: 0 auto; }
+
+/* a subtle periwinkle glow to tie sections to the journey palette */
+.act-clinics::before {
+  content: "";
+  position: absolute; left: 50%; top: 0; transform: translateX(-50%);
+  width: 80%; height: 320px;
+  background: radial-gradient(closest-side, rgba(102,110,255,0.14), transparent 75%);
+  pointer-events: none;
+}
+
+/* ---- footer ---- */
+.site-foot { border-top: 1px solid var(--line); background: #000; }
+.site-foot .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; padding-top: 22px; padding-bottom: 22px; }
+.site-foot span { font-size: 13px; color: var(--ink-soft); }
+
+@media (max-width: 560px) {
+  .act { padding: 64px 18px; }
+}

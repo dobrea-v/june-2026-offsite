@@ -1,0 +1,90 @@
+/* Clinic-finder widget — pick a partner optometrist. Scoped under .oryx-clinics.
+   Uses Leaflet/OpenStreetMap (loaded on demand from CDN). The selectable list works
+   even if map tiles fail to load. Shares the host site's colour tokens. */
+
+.oryx-clinics {
+  --ocf-accent: #666eff;
+  --ocf-accent-deep: #2f5dff;
+  --ocf-card: #16161c;
+  --ocf-line: rgba(255,255,255,0.1);
+  --ocf-ink: #ffffff;
+  --ocf-muted: rgba(255,255,255,0.6);
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  font-family: "Wix Madefor Text", "Inter", system-ui, sans-serif;
+  color: var(--ocf-ink);
+  box-sizing: border-box;
+}
+.oryx-clinics *, .oryx-clinics *::before, .oryx-clinics *::after { box-sizing: border-box; }
+
+.oryx-clinics .ocf-grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 18px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--ocf-card);
+  box-shadow: inset 0 0 0 1px var(--ocf-line);
+}
+
+/* ---- list ---- */
+.oryx-clinics .ocf-list { padding: 16px; max-height: 520px; overflow-y: auto; }
+.oryx-clinics .ocf-list-head { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ocf-muted); margin: 4px 6px 14px; }
+.oryx-clinics .ocf-clinic {
+  display: block; width: 100%; text-align: left; cursor: pointer;
+  background: rgba(255,255,255,0.03); border: 1.5px solid var(--ocf-line);
+  border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; color: inherit;
+  font-family: inherit; transition: border-color .15s ease, background .15s ease, transform .08s ease;
+}
+.oryx-clinics .ocf-clinic:hover { background: rgba(102,110,255,0.08); border-color: rgba(102,110,255,0.4); }
+.oryx-clinics .ocf-clinic.is-sel { border-color: var(--ocf-accent); background: rgba(102,110,255,0.14); }
+.oryx-clinics .ocf-clinic:active { transform: translateY(1px); }
+.oryx-clinics .ocf-c-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.oryx-clinics .ocf-c-name { font-family: "Wix Madefor Display", system-ui, sans-serif; font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+.oryx-clinics .ocf-c-dist { font-size: 12px; font-weight: 600; color: var(--ocf-accent); white-space: nowrap; }
+.oryx-clinics .ocf-c-addr { font-size: 13px; line-height: 1.45; color: var(--ocf-muted); margin-top: 4px; }
+.oryx-clinics .ocf-c-meta { display: flex; gap: 12px; margin-top: 8px; font-size: 12px; color: var(--ocf-muted); }
+.oryx-clinics .ocf-c-meta b { color: var(--ocf-ink); font-weight: 600; }
+
+/* ---- map ---- */
+.oryx-clinics .ocf-map { min-height: 520px; height: 100%; background: #0e0e12; position: relative; }
+.oryx-clinics .ocf-map .leaflet-container { height: 100%; width: 100%; background: #0e0e12; font-family: inherit; }
+.oryx-clinics .ocf-map-fallback {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 30px; color: var(--ocf-muted); font-size: 14px;
+}
+/* periwinkle pin */
+.oryx-clinics .ocf-pin { display: block; }
+.oryx-clinics .ocf-pin span {
+  display: block; width: 18px; height: 18px; border-radius: 50% 50% 50% 0;
+  background: var(--ocf-accent); transform: rotate(-45deg);
+  box-shadow: 0 0 0 3px rgba(102,110,255,0.3), 0 2px 8px rgba(0,0,0,0.5);
+  transition: transform .15s ease, background .15s ease;
+}
+.oryx-clinics .ocf-pin.is-sel span { background: #fff; transform: rotate(-45deg) scale(1.35); box-shadow: 0 0 0 4px rgba(102,110,255,0.55), 0 2px 10px rgba(0,0,0,0.5); }
+
+/* ---- selected bar ---- */
+.oryx-clinics .ocf-bar {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  margin-top: 16px; padding: 16px 18px; border-radius: 16px;
+  background: rgba(102,110,255,0.1); border: 1px solid rgba(102,110,255,0.3);
+}
+.oryx-clinics .ocf-bar.is-empty { background: rgba(255,255,255,0.04); border-color: var(--ocf-line); }
+.oryx-clinics .ocf-bar-text { font-size: 14px; color: var(--ocf-muted); }
+.oryx-clinics .ocf-bar-text b { color: var(--ocf-ink); font-weight: 700; }
+.oryx-clinics .ocf-continue {
+  margin-left: auto; border: 0; border-radius: 999px; padding: 13px 26px; cursor: pointer;
+  font-family: "Wix Madefor Display", system-ui, sans-serif; font-size: 15px; font-weight: 700;
+  background: #fff; color: #0a0a0b; text-decoration: none; transition: background .15s ease, color .15s ease, transform .08s ease;
+}
+.oryx-clinics .ocf-continue:hover { background: var(--ocf-accent); color: #fff; }
+.oryx-clinics .ocf-continue:active { transform: translateY(1px); }
+.oryx-clinics .ocf-continue[disabled] { background: rgba(255,255,255,0.14); color: rgba(255,255,255,0.45); cursor: not-allowed; pointer-events: none; }
+
+@media (max-width: 760px) {
+  .oryx-clinics .ocf-grid { grid-template-columns: 1fr; }
+  .oryx-clinics .ocf-map { min-height: 300px; order: -1; }
+  .oryx-clinics .ocf-list { max-height: none; }
+  .oryx-clinics .ocf-continue { margin-left: 0; width: 100%; text-align: center; }
+}

@@ -1,0 +1,379 @@
+/* Scroll-journey widget — "Scroll yourself sharp".
+   Component styles scoped under .oryx-journey. Global resets, body and the shared
+   colour variables live in the host site's CSS (assets/site.css), which defines
+   --bg, --ink, --ink-soft, --lilac, --violet, --violet-deep, --track, --paper, --paper-ink. */
+
+.oryx-journey { position: relative; }
+
+/* ---------- Intro ---------- */
+.oryx-journey .intro {
+  min-height: 92vh;
+  min-height: 92dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+  position: relative;
+}
+.oryx-journey .wordmark {
+  position: absolute;
+  top: 36px;
+  font-family: "Wix Madefor Display", system-ui, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+.oryx-journey .wordmark sup { color: var(--lilac); font-size: 0.9em; vertical-align: super; }
+
+.oryx-journey .eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--lilac);
+  margin-bottom: 18px;
+}
+
+.oryx-journey .intro h1 {
+  font-family: "Wix Madefor Display", system-ui, sans-serif;
+  font-size: clamp(36px, 6vw, 64px);
+  line-height: 1.06;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 18px;
+  max-width: 760px;
+}
+.oryx-journey .intro h1 .accent {
+  background: linear-gradient(100deg, var(--lilac) 0%, var(--violet) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.oryx-journey .intro p {
+  color: var(--ink-soft);
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 540px;
+}
+
+.oryx-journey .scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.oryx-journey .scroll-hint .chevron {
+  width: 14px;
+  height: 14px;
+  border-right: 2px solid var(--lilac);
+  border-bottom: 2px solid var(--lilac);
+  transform: rotate(45deg);
+  animation: oxj-bob 1.6s ease-in-out infinite;
+}
+@keyframes oxj-bob {
+  0%, 100% { transform: rotate(45deg) translate(0, 0); opacity: 1; }
+  50%      { transform: rotate(45deg) translate(5px, 5px); opacity: 0.45; }
+}
+
+/* ---------- Scroll journey ---------- */
+.oryx-journey .journey {
+  position: relative;
+  height: 420vh;   /* scroll distance = the 40 sessions */
+}
+.oryx-journey .sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  padding: 24px 20px;
+  overflow: hidden;
+}
+.oryx-journey .sticky::before {
+  content: "";
+  position: absolute;
+  top: -12%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 720px;
+  height: 380px;
+  background: radial-gradient(420px 220px at 50% 50%, rgba(102, 110, 255, 0.22), transparent 70%);
+  pointer-events: none;
+}
+
+.oryx-journey .vision-stage {
+  position: relative;
+  width: min(820px, 100%);
+  height: min(54vh, 430px);
+  height: min(52dvh, 430px);
+  border-radius: 16px;
+  background: var(--paper);
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+}
+.oryx-journey .menu-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 24px;
+}
+.oryx-journey .menu-card {
+  width: 100%;
+  max-width: 460px;
+  text-align: center;
+  color: var(--paper-ink);
+  user-select: none;
+}
+.oryx-journey .menu-card .restaurant {
+  font-family: "Wix Madefor Display", serif;
+  font-size: clamp(17px, 2.6vw, 24px);
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  margin-bottom: 4px;
+}
+.oryx-journey .menu-card .sub {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #8a8090;
+  margin-bottom: 20px;
+}
+.oryx-journey .menu-card .dish {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  font-size: clamp(13px, 1.8vw, 15.5px);
+  margin: 0 auto 10px;
+  max-width: 350px;
+}
+.oryx-journey .menu-card .dish .dots {
+  flex: 1;
+  border-bottom: 1.5px dotted #b9b0c2;
+  transform: translateY(-4px);
+}
+.oryx-journey .menu-card .dish .price { font-weight: 600; }
+.oryx-journey .menu-card .fineprint {
+  margin-top: 18px;
+  font-size: 10px;
+  line-height: 1.6;
+  color: #97909e;
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.oryx-journey #blurryLayer { filter: blur(7px); will-change: filter; }
+.oryx-journey #sharpLayer  { will-change: opacity; }
+
+.oryx-journey #glasses {
+  position: absolute;
+  pointer-events: none;
+  filter: drop-shadow(0 10px 18px rgba(43, 36, 51, 0.35));
+  will-change: transform, opacity;
+  z-index: 3;
+}
+
+.oryx-journey .acuity-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #fff;
+  background: linear-gradient(100deg, var(--violet) 0%, var(--violet-deep) 100%);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-variant-numeric: tabular-nums;
+  z-index: 4;
+}
+
+/* ---------- HUD: rail + beats ---------- */
+.oryx-journey .hud { width: min(820px, 100%); z-index: 2; }
+.oryx-journey .hud-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 14px;
+}
+.oryx-journey .rail-label {
+  font-family: "Wix Madefor Display", system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--ink-soft);
+}
+.oryx-journey .session-label {
+  font-family: "Wix Madefor Display", system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--lilac);
+  font-variant-numeric: tabular-nums;
+}
+.oryx-journey .rail {
+  position: relative;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--track);
+  overflow: visible;
+}
+.oryx-journey .rail .fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--violet), var(--lilac));
+  will-change: width;
+}
+.oryx-journey .rail .playhead {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='19 18 26 29'%3E%3Cpath d='M39.9226 37.5509C38.6316 35.2096 35.5717 33.5632 32 33.5632C28.4283 33.5632 25.3684 35.2096 24.0774 37.5509C23.2561 39.0427 21.3481 40.0286 19.2085 40.0286H19C21.6682 44.209 26.493 47 32 47C37.507 47 42.3318 44.209 45 40.0286H44.7915C42.6519 40.0286 40.7439 39.0427 39.9226 37.5509ZM24.0774 27.4491C25.3684 29.7903 28.4283 31.4368 32 31.4368C35.5717 31.4368 38.6316 29.7903 39.9226 27.4491C40.7439 25.9573 42.6519 24.9714 44.7915 24.9714H45C42.3318 20.791 37.507 18 32 18C26.493 18 21.6682 20.791 19 24.9714H19.2085C21.3481 24.9714 23.2561 25.9573 24.0774 27.4491Z' fill='%230a0a0b'/%3E%3C/svg%3E") center / 60% no-repeat;
+  border: 2.5px solid var(--violet);
+  box-shadow: 0 2px 12px rgba(102, 110, 255, 0.55);
+  will-change: left;
+  z-index: 2;
+}
+.oryx-journey .rail .tick {
+  position: absolute;
+  top: -5px;
+  width: 2px;
+  height: 16px;
+  border-radius: 2px;
+  background: var(--track);
+  transform: translateX(-50%);
+  transition: background 200ms ease;
+}
+.oryx-journey .rail .tick.reached { background: var(--lilac); }
+.oryx-journey .tick-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+.oryx-journey .tick-labels span { transition: color 200ms ease; }
+.oryx-journey .tick-labels span.reached { color: var(--lilac); font-weight: 600; }
+
+.oryx-journey .beat {
+  margin-top: 20px;
+  text-align: center;
+  font-size: clamp(14px, 1.9vw, 16px);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  min-height: 50px;
+  transition: opacity 250ms ease;
+}
+.oryx-journey .beat strong { color: var(--ink); }
+
+/* ---------- Outro ---------- */
+.oryx-journey .outro {
+  min-height: 56vh;
+  min-height: 56dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px 64px;
+}
+.oryx-journey .outro h2 {
+  font-family: "Wix Madefor Display", system-ui, sans-serif;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.oryx-journey .outro h2 .accent {
+  background: linear-gradient(100deg, var(--lilac) 0%, var(--violet) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.oryx-journey .outro p {
+  color: var(--ink-soft);
+  font-size: 17px;
+  line-height: 1.6;
+  max-width: 520px;
+  margin-bottom: 34px;
+}
+.oryx-journey .cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  background: #fff;
+  color: #0a0a0b;
+  font-family: "Wix Madefor Display", system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 16px 36px;
+  border-radius: 999px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease, color 150ms ease;
+}
+.oryx-journey .cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(185, 168, 249, 0.35);
+}
+.oryx-journey .cta:active { transform: translateY(0); }
+.oryx-journey .cta .arrow { transition: transform 150ms ease; }
+.oryx-journey .cta:hover .arrow { transform: translateX(4px); }
+
+.oryx-journey .replay {
+  margin-top: 22px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: var(--ink-soft);
+  font-size: 13px;
+  text-decoration: underline;
+  font-family: inherit;
+}
+.oryx-journey .replay:hover { color: var(--ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  .oryx-journey .scroll-hint .chevron { animation: none; }
+  .oryx-journey .beat,
+  .oryx-journey .tick,
+  .oryx-journey .tick-labels span,
+  .oryx-journey .cta,
+  .oryx-journey .cta .arrow { transition: none; }
+}
+@media (max-height: 600px) {
+  .oryx-journey .vision-stage { height: 46vh; height: 46dvh; }
+  .oryx-journey .beat { min-height: 38px; margin-top: 12px; }
+}
+@media (max-width: 560px) {
+  .oryx-journey .sticky { gap: 18px; padding: 16px 14px; }
+  .oryx-journey .menu-card .fineprint { font-size: 9px; margin-top: 12px; }
+  .oryx-journey .hud-top { margin-bottom: 10px; }
+  .oryx-journey .session-label { font-size: 17px; }
+  .oryx-journey .tick-labels { font-size: 9.5px; }
+  .oryx-journey .beat { font-size: 13.5px; min-height: 44px; margin-top: 14px; }
+}

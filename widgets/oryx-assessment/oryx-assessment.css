@@ -1,0 +1,276 @@
+/* Oryx Near-Vision Assessment widget — scoped styles.
+   Design reference: oryxneuro.com — black canvas, white text, periwinkle/indigo accent,
+   white pill buttons, big tight headlines (Wix Madefor → Inter fallback here).
+   All rules live under .oryx-assess so the widget can be embedded without leaking. */
+
+.oryx-assess {
+  --ox-bg: #080808;
+  --ox-bg-2: #131318;
+  --ox-ink: #16181d;            /* text on the white card */
+  --ox-muted: #6a6f7a;
+  --ox-line: #ececf1;
+  --ox-accent: #666eff;         /* periwinkle / indigo — the brand accent */
+  --ox-accent-deep: #2f5dff;
+  --ox-accent-soft: #b9bcff;
+  --ox-card: #ffffff;
+  --ox-radius: 16px;
+  --ox-sans: "Wix Madefor Display", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --ox-serif: Georgia, "Times New Roman", "PT Serif", serif;
+
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  font-family: var(--ox-sans);
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  text-align: left;
+}
+.oryx-assess *, .oryx-assess *::before, .oryx-assess *::after { box-sizing: border-box; }
+
+.oryx-assess .ox-shell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  padding: 24px 24px 16px;
+  background: var(--ox-bg);
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+/* subtle periwinkle glow, echoing the site's neuroscience gradient band */
+.oryx-assess .ox-shell::after {
+  content: "";
+  position: absolute;
+  right: -20%;
+  top: -25%;
+  width: 75%;
+  height: 60%;
+  background: radial-gradient(closest-side, rgba(102, 110, 255, 0.30), transparent 70%);
+  pointer-events: none;
+}
+
+/* ---------- header ---------- */
+.oryx-assess .ox-head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.oryx-assess .ox-brand { display: flex; align-items: baseline; gap: 8px; }
+.oryx-assess .ox-mark { width: 24px; height: 24px; align-self: center; flex: none; }
+.oryx-assess .ox-mark path { fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; }
+.oryx-assess .ox-word { color: #fff; font-weight: 700; font-size: 21px; letter-spacing: -0.02em; }
+.oryx-assess .ox-word sup { font-size: 9px; top: -0.9em; }
+.oryx-assess .ox-tag { color: rgba(255,255,255,0.55); font-size: 12px; font-weight: 500; }
+.oryx-assess .ox-steps { display: flex; gap: 6px; }
+.oryx-assess .ox-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.2); transition: background .2s; }
+.oryx-assess .ox-dot.is-on { background: var(--ox-accent); }
+
+/* ---------- generic body / buttons ---------- */
+.oryx-assess .ox-body { position: relative; }
+.oryx-assess .ox-title {
+  color: #fff; font-size: 32px; line-height: 1.05; font-weight: 800; margin: 6px 0 12px;
+  letter-spacing: -0.03em;
+}
+.oryx-assess .ox-lede { color: rgba(255,255,255,0.72); font-size: 15px; line-height: 1.55; margin: 0 0 20px; }
+.oryx-assess .ox-fine { color: rgba(255,255,255,0.5); font-size: 12px; line-height: 1.5; margin: 14px 0 0; }
+.oryx-assess .ox-fine b { color: rgba(255,255,255,0.78); font-weight: 600; }
+
+.oryx-assess .ox-btn {
+  display: inline-block;
+  width: 100%;
+  border: 0;
+  border-radius: 999px;            /* pill, matching site CTAs */
+  padding: 15px 22px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .08s ease, background .15s ease, color .15s ease, box-shadow .15s ease;
+}
+.oryx-assess .ox-btn:active { transform: translateY(1px); }
+.oryx-assess .ox-btn-primary { background: #fff; color: #080808; }
+.oryx-assess .ox-btn-primary:hover { background: var(--ox-accent); color: #fff; }
+.oryx-assess .ox-btn-primary:disabled { background: rgba(255,255,255,0.14); color: rgba(255,255,255,0.45); cursor: not-allowed; }
+.oryx-assess .ox-btn-ghost { background: transparent; color: #fff; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.35); }
+.oryx-assess .ox-btn-ghost:hover { box-shadow: inset 0 0 0 1.5px #fff; }
+.oryx-assess .ox-link {
+  display: inline-block; margin-top: 14px; background: none; border: 0; cursor: pointer;
+  color: rgba(255,255,255,0.55); font-family: inherit; font-size: 13px; text-decoration: underline;
+}
+.oryx-assess .ox-link:hover { color: #fff; }
+
+/* ---------- intro ---------- */
+.oryx-assess .ox-howto { list-style: none; margin: 0 0 22px; padding: 0; display: grid; gap: 10px; }
+.oryx-assess .ox-howto li {
+  color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.45;
+  padding: 13px 15px; border-radius: 12px; background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.oryx-assess .ox-howto b { color: #fff; }
+
+/* ---------- reading test ---------- */
+.oryx-assess .ox-instr { color: rgba(255,255,255,0.8); font-size: 14px; margin: 0 0 14px; }
+.oryx-assess .ox-instr b { color: #fff; }
+.oryx-assess .ox-chart {
+  background: var(--ox-card);
+  border-radius: var(--ox-radius);
+  padding: 4px 6px;
+  box-shadow: 0 12px 36px -14px rgba(0,0,0,0.7);
+  /* Responsive base for the reading lines. Each line's size is expressed in `em`
+     relative to this, so the proportional step-down (A1 largest → A9 smallest) is
+     preserved while the whole ladder scales down to fit a phone. */
+  font-size: clamp(11px, 3.4vw, 16px);
+}
+.oryx-assess .ox-row {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) 26px;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--ox-line);
+  padding: 14px 8px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  transition: background .12s ease;
+}
+.oryx-assess .ox-row:last-child { border-bottom: 0; }
+.oryx-assess .ox-row:hover { background: #f4f5ff; }
+.oryx-assess .ox-code {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  color: var(--ox-ink); font-weight: 800; font-size: 18px; line-height: 1;
+}
+.oryx-assess .ox-code em { font-style: normal; font-weight: 600; font-size: 10px; color: var(--ox-muted); margin-top: 3px; }
+.oryx-assess .ox-sample {
+  font-family: var(--ox-serif); color: var(--ox-ink); line-height: 1.25;
+  min-width: 0;                 /* allow the 1fr column to shrink below content width */
+  overflow-wrap: anywhere;      /* wrap long words instead of overflowing off-screen */
+}
+.oryx-assess .ox-tick {
+  width: 22px; height: 22px; border-radius: 7px; justify-self: end;
+  border: 2px solid #cfd2dd; background: #fff; position: relative; transition: all .12s ease;
+}
+.oryx-assess .ox-row.is-sel { background: #eef0ff; }
+.oryx-assess .ox-row.is-sel .ox-tick { border-color: var(--ox-accent); background: var(--ox-accent); }
+.oryx-assess .ox-row.is-sel .ox-tick::after {
+  content: ""; position: absolute; left: 6px; top: 2px; width: 6px; height: 11px;
+  border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: rotate(42deg);
+}
+.oryx-assess .ox-row.is-read .ox-tick { border-color: var(--ox-accent-deep); background: rgba(102,110,255,0.16); }
+.oryx-assess .ox-row.is-read .ox-tick::after {
+  content: ""; position: absolute; left: 6px; top: 2px; width: 6px; height: 11px;
+  border: solid var(--ox-accent-deep); border-width: 0 2.5px 2.5px 0; transform: rotate(42deg);
+}
+.oryx-assess .ox-row.is-dim { opacity: 0.4; }
+
+.oryx-assess .ox-cantread {
+  display: block; width: 100%; margin: 12px 0; background: none; border: 0; cursor: pointer;
+  color: rgba(255,255,255,0.55); font-family: inherit; font-size: 13px; text-decoration: underline;
+}
+.oryx-assess .ox-cantread:hover { color: #fff; }
+
+/* ---------- one-line-at-a-time test (mobile) ---------- */
+.oryx-assess .ox-step-top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.oryx-assess .ox-step-count { color: rgba(255,255,255,0.6); font-size: 12px; font-weight: 600; white-space: nowrap; }
+.oryx-assess .ox-progress { flex: 1; height: 5px; border-radius: 999px; background: rgba(255,255,255,0.14); overflow: hidden; }
+.oryx-assess .ox-progress i { display: block; height: 100%; background: var(--ox-accent); border-radius: 999px; transition: width .25s ease; }
+.oryx-assess .ox-step-card {
+  background: var(--ox-card);
+  border-radius: var(--ox-radius);
+  box-shadow: 0 12px 36px -14px rgba(0,0,0,0.7);
+  /* responsive base so each line's em size keeps the proportional acuity step-down */
+  font-size: clamp(13px, 4vw, 18px);
+  min-height: 168px;
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 18px;
+}
+.oryx-assess .ox-step-code {
+  font-family: var(--ox-sans); color: var(--ox-muted); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px;
+}
+.oryx-assess .ox-step-sample {
+  font-family: var(--ox-serif); color: var(--ox-ink); line-height: 1.3; margin: 0;
+  max-width: 100%; overflow-wrap: anywhere;
+}
+.oryx-assess .ox-step-q { color: rgba(255,255,255,0.85); font-size: 15px; text-align: center; margin: 0 0 14px; }
+.oryx-assess .ox-step-q b { color: #fff; }
+.oryx-assess .ox-step-btns { display: flex; gap: 10px; }
+.oryx-assess .ox-step-btns .ox-btn { width: auto; flex: 1; }
+.oryx-assess .ox-stepv .ox-link { display: block; width: 100%; text-align: center; }
+
+/* ---------- capture ---------- */
+.oryx-assess .ox-teaser {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--ox-radius); padding: 24px 18px; text-align: center; margin-bottom: 18px;
+}
+.oryx-assess .ox-teaser-lock { font-size: 30px; margin-bottom: 8px; }
+.oryx-assess .ox-teaser-text { color: #fff; font-size: 19px; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 6px; }
+.oryx-assess .ox-teaser-sub { color: rgba(255,255,255,0.7); font-size: 14px; line-height: 1.5; margin: 0; }
+.oryx-assess .ox-teaser-sub b { color: var(--ox-accent-soft); }
+.oryx-assess .ox-field { display: block; margin-bottom: 12px; }
+.oryx-assess .ox-field span { display: block; color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.oryx-assess .ox-field input {
+  width: 100%; padding: 14px 16px; border-radius: 12px; border: 1.5px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.97); color: var(--ox-ink); font-family: inherit; font-size: 16px;
+}
+.oryx-assess .ox-field input:focus { outline: none; border-color: var(--ox-accent); box-shadow: 0 0 0 3px rgba(102,110,255,0.35); }
+.oryx-assess .ox-err { color: #ff9a8f; font-size: 13px; margin: -4px 0 10px; }
+
+/* ---------- result ---------- */
+.oryx-assess .ox-result-kicker {
+  color: var(--ox-accent-soft); font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; margin: 0 0 12px;
+}
+.oryx-assess .ox-score {
+  display: flex; align-items: stretch; gap: 14px; margin-bottom: 16px;
+}
+.oryx-assess .ox-score-main, .oryx-assess .ox-score-age {
+  flex: 1; border-radius: var(--ox-radius); padding: 18px; text-align: center;
+}
+.oryx-assess .ox-score-main { background: #fff; }
+.oryx-assess .ox-score-line { display: block; color: var(--ox-ink); font-size: 40px; font-weight: 800; line-height: 1; letter-spacing: -0.02em; }
+.oryx-assess .ox-score-frac { display: block; color: var(--ox-muted); font-size: 14px; font-weight: 600; margin-top: 4px; }
+.oryx-assess .ox-score-age { background: linear-gradient(155deg, #8b91ff, var(--ox-accent) 45%, var(--ox-accent-deep)); color: #fff; }
+.oryx-assess .ox-age-num { display: block; font-size: 40px; font-weight: 800; line-height: 1; letter-spacing: -0.02em; }
+.oryx-assess .ox-age-cap { display: block; font-size: 12px; font-weight: 600; opacity: 0.92; margin-top: 6px; }
+.oryx-assess .ox-result-text { color: rgba(255,255,255,0.78); font-size: 15px; line-height: 1.55; margin: 0 0 16px; }
+.oryx-assess .ox-result-text b { color: #fff; }
+.oryx-assess .ox-upside {
+  background: rgba(102,110,255,0.12); border: 1px solid rgba(102,110,255,0.32);
+  border-radius: var(--ox-radius); padding: 16px; margin-bottom: 18px;
+}
+.oryx-assess .ox-upside p { margin: 0; color: rgba(255,255,255,0.82); font-size: 14px; line-height: 1.55; }
+.oryx-assess .ox-upside b { color: var(--ox-accent-soft); }
+.oryx-assess .ox-cta-row { display: flex; gap: 10px; }
+.oryx-assess .ox-cta-row .ox-btn { width: auto; flex: 1; }
+
+/* ---------- footer ---------- */
+.oryx-assess .ox-foot {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px;
+  margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.1);
+}
+.oryx-assess .ox-foot a { color: rgba(255,255,255,0.65); font-size: 12px; text-decoration: none; }
+.oryx-assess .ox-foot a:hover { color: #fff; }
+.oryx-assess .ox-foot-note { margin-left: auto; color: rgba(255,255,255,0.4); font-size: 11px; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 480px) {
+  .oryx-assess .ox-shell { padding: 18px 14px 12px; border-radius: 18px; }
+  .oryx-assess .ox-title { font-size: 26px; }
+  .oryx-assess .ox-row { grid-template-columns: 44px 1fr 22px; gap: 8px; padding: 12px 4px; }
+  .oryx-assess .ox-score { flex-direction: row; }
+  .oryx-assess .ox-tag { display: none; }
+}
