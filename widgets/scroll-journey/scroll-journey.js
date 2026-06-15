@@ -19,9 +19,12 @@
   function template(opts) {
     var nextHref = opts.nextHref || '#assess';
     var nextLabel = opts.nextLabel || 'Test your own vision';
+    var logo = opts.logoSrc
+      ? '<img class="wordmark wordmark-img" src="' + opts.logoSrc + '" alt="Oryx">'
+      : '<div class="wordmark">oryx<sup>™</sup></div>';
     return '' +
     '<section class="intro">' +
-      '<div class="wordmark">oryx<sup>™</sup></div>' +
+      logo +
       '<span class="eyebrow">It’s not rocket science. It’s neuroscience.</span>' +
       '<h1>Lose the readers. <span class="accent">Keep the clarity.</span></h1>' +
       '<p>Right now, the only sharp part of the menu is behind your reading glasses. ' +

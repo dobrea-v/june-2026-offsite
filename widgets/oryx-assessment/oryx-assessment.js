@@ -37,12 +37,6 @@
     { code: 'A9', frac: '6/4.8', size: 7.5, weight: 500, age: '25', text: 'Pharmacy dosage instructions on medication packs' }
   ];
 
-  var ORYX_MARK =
-    '<svg class="ox-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">' +
-    '<path d="M7 33 C9 19 14 11 21 6" />' +
-    '<path d="M14 33 C17 21 23 14 31 11" />' +
-    '</svg>';
-
   function esc(s) {
     return String(s).replace(/[&<>"]/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
@@ -142,6 +136,7 @@
   };
 
   OryxWidget.prototype.header = function () {
+    var titles = { intro: 'Take the Oryx Test', test: 'Take the Oryx Test', capture: 'Almost there', result: 'Your result' };
     var step = { intro: 0, test: 1, capture: 2, result: 3 }[this.state];
     var dots = '';
     for (var i = 0; i < 4; i++) {
@@ -149,10 +144,7 @@
     }
     return (
       '<header class="ox-head">' +
-        '<div class="ox-brand">' + ORYX_MARK +
-          '<span class="ox-word">oryx<sup>™</sup></span>' +
-          '<span class="ox-tag">See close. Go far.</span>' +
-        '</div>' +
+        '<h2 class="ox-head-title">' + titles[this.state] + '</h2>' +
         '<div class="ox-steps" aria-hidden="true">' + dots + '</div>' +
       '</header>'
     );
@@ -171,9 +163,8 @@
   OryxWidget.prototype.viewIntro = function () {
     return (
       '<section class="ox-body ox-intro">' +
-        '<h1 class="ox-title">Take the Oryx Test</h1>' +
-        '<p class="ox-lede">A 30-second check of your near vision. Find the smallest line of text ' +
-          'you can still read comfortably — then see how sharp your eyes really are.</p>' +
+        '<p class="ox-lede">A 30-second, indicative check of your near vision — find the smallest ' +
+          'line you can read comfortably.</p>' +
         '<ul class="ox-howto">' +
           '<li><b>1.</b> Hold your ' + (this.handheld ? 'phone' : 'screen') + ' ' + this.distanceText() + ' from your face.</li>' +
           '<li><b>2.</b> Read <b>without</b> reading glasses, in normal light.</li>' +
@@ -296,7 +287,6 @@
     var gainL = LINES[gain];
     return (
       '<section class="ox-body ox-result">' +
-        '<p class="ox-result-kicker">Your indicative result</p>' +
         '<div class="ox-score">' +
           '<div class="ox-score-main">' +
             '<span class="ox-score-line">' + esc(L.code) + '</span>' +

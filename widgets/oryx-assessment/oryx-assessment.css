@@ -57,23 +57,14 @@
   gap: 12px;
   margin-bottom: 18px;
 }
-.oryx-assess .ox-brand { display: flex; align-items: baseline; gap: 8px; }
-.oryx-assess .ox-mark { width: 24px; height: 24px; align-self: center; flex: none; }
-.oryx-assess .ox-mark path { fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; }
-.oryx-assess .ox-word { color: #fff; font-weight: 700; font-size: 21px; letter-spacing: -0.02em; }
-.oryx-assess .ox-word sup { font-size: 9px; top: -0.9em; }
-.oryx-assess .ox-tag { color: rgba(255,255,255,0.55); font-size: 12px; font-weight: 500; }
-.oryx-assess .ox-steps { display: flex; gap: 6px; }
+.oryx-assess .ox-head-title { margin: 0; color: #fff; font-size: 19px; font-weight: 800; letter-spacing: -0.02em; }
+.oryx-assess .ox-steps { display: flex; gap: 6px; flex: none; }
 .oryx-assess .ox-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.2); transition: background .2s; }
 .oryx-assess .ox-dot.is-on { background: var(--ox-accent); }
 
 /* ---------- generic body / buttons ---------- */
 .oryx-assess .ox-body { position: relative; }
-.oryx-assess .ox-title {
-  color: #fff; font-size: 32px; line-height: 1.05; font-weight: 800; margin: 6px 0 12px;
-  letter-spacing: -0.03em;
-}
-.oryx-assess .ox-lede { color: rgba(255,255,255,0.72); font-size: 15px; line-height: 1.55; margin: 0 0 20px; }
+.oryx-assess .ox-lede { color: rgba(255,255,255,0.72); font-size: 15px; line-height: 1.55; margin: 4px 0 20px; }
 .oryx-assess .ox-fine { color: rgba(255,255,255,0.5); font-size: 12px; line-height: 1.5; margin: 14px 0 0; }
 .oryx-assess .ox-fine b { color: rgba(255,255,255,0.78); font-weight: 600; }
 
@@ -269,8 +260,7 @@
 /* ---------- responsive ---------- */
 @media (max-width: 480px) {
   .oryx-assess .ox-shell { padding: 18px 14px 12px; border-radius: 18px; }
-  .oryx-assess .ox-title { font-size: 26px; }
+  .oryx-assess .ox-head-title { font-size: 17px; }
   .oryx-assess .ox-row { grid-template-columns: 44px 1fr 22px; gap: 8px; padding: 12px 4px; }
   .oryx-assess .ox-score { flex-direction: row; }
-  .oryx-assess .ox-tag { display: none; }
 }

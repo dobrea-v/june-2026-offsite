@@ -20,12 +20,16 @@
 .oryx-journey .wordmark {
   position: absolute;
   top: 36px;
+  left: 50%;
+  transform: translateX(-50%);
   font-family: "Wix Madefor Display", system-ui, sans-serif;
   font-size: 22px;
   font-weight: 700;
   letter-spacing: 0.02em;
   user-select: none;
 }
+/* white logo (transparent PNG) — sits cleanly on the black intro */
+.oryx-journey .wordmark-img { height: 30px; width: auto; display: block; }
 .oryx-journey .wordmark sup { color: var(--lilac); font-size: 0.9em; vertical-align: super; }
 
 .oryx-journey .eyebrow {
